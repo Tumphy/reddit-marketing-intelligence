@@ -1,0 +1,185 @@
+{
+  "_description": "Production configuration for GreendoorAI Reddit Marketing Intelligence System",
+  "_version": "2.0.0",
+  "_lastUpdated": "2025-07-18",
+  
+  "scraping": {
+    "maxRetries": 3,
+    "retryDelay": 5000,
+    "requestDelay": 2000,
+    "batchSize": 10,
+    "maxConcurrent": 3,
+    "timeoutMs": 30000
+  },
+  
+  "quality": {
+    "minContentLength": 50,
+    "minRelevanceScore": 3,
+    "minQualityScore": 1,
+    "enableValidation": true,
+    "filterDeleted": true,
+    "filterRemoved": true
+  },
+  
+  "output": {
+    "dataDirectory": "./data",
+    "logDirectory": "./logs", 
+    "archiveDirectory": "./archive",
+    "maxFileSize": 52428800,
+    "enableTimestamps": true,
+    "enableCompression": false
+  },
+  
+  "backup": {
+    "enableBackup": true,
+    "enableRecovery": true,
+    "backupInterval": 5,
+    "retentionDays": 30,
+    "enableCloudBackup": false,
+    "cloudProvider": null
+  },
+  
+  "monitoring": {
+    "enableLogging": true,
+    "enableMetrics": true,
+    "enableAlerts": false,
+    "logLevel": "INFO",
+    "metricsInterval": 60000
+  },
+  
+  "subreddits": {
+    "primary": [
+      "sales",
+      "techsales", 
+      "startups",
+      "entrepreneur",
+      "SaaS"
+    ],
+    "secondary": [
+      "EntrepreneurRideAlong",
+      "smallbusiness",
+      "marketing", 
+      "salesforce",
+      "hubspot"
+    ],
+    "optional": [
+      "digitalnomad",
+      "remotework",
+      "productivity"
+    ],
+    "custom": []
+  },
+  
+  "keywords": {
+    "highPriority": [
+      "cold calling",
+      "cold email", 
+      "prospecting",
+      "lead generation",
+      "sales automation",
+      "crm",
+      "pipeline",
+      "quota"
+    ],
+    "mediumPriority": [
+      "meeting prep",
+      "demo",
+      "proposal",
+      "objection handling",
+      "follow up",
+      "contact management"
+    ],
+    "painPoints": [
+      "frustrated",
+      "overwhelmed",
+      "time consuming",
+      "manual",
+      "repetitive",
+      "difficult"
+    ],
+    "successMetrics": [
+      "saved",
+      "automated",
+      "increased",
+      "improved",
+      "faster",
+      "efficiency"
+    ]
+  },
+  
+  "scoring": {
+    "relevanceWeights": {
+      "keywordMatch": 2,
+      "titleKeywords": 3,
+      "contentKeywords": 1,
+      "painPoints": 4,
+      "successMetrics": 3
+    },
+    "qualityWeights": {
+      "contentLength": 1,
+      "engagement": 2,
+      "recency": 1,
+      "upvoteRatio": 1
+    },
+    "priorityThresholds": {
+      "urgent": 20,
+      "high": 15,
+      "medium": 10,
+      "low": 5
+    }
+  },
+  
+  "limits": {
+    "postsPerSubreddit": {
+      "hot": 50,
+      "top": 25,
+      "new": 10
+    },
+    "maxTotalPosts": 2000,
+    "maxOutputPosts": {
+      "urgent": 100,
+      "highValue": 200,
+      "detailed": 500
+    }
+  },
+  
+  "integrations": {
+    "webhooks": {
+      "enabled": false,
+      "url": null,
+      "events": ["completion", "error"],
+      "authentication": null
+    },
+    "slack": {
+      "enabled": false,
+      "webhookUrl": null,
+      "channel": "#marketing",
+      "notifyOnCompletion": true
+    },
+    "email": {
+      "enabled": false,
+      "smtpConfig": null,
+      "recipients": [],
+      "sendSummary": true
+    }
+  },
+  
+  "scheduling": {
+    "enabled": false,
+    "frequency": "weekly",
+    "dayOfWeek": 1,
+    "hour": 9,
+    "timezone": "UTC",
+    "maxRuntimeMinutes": 30
+  },
+  
+  "advanced": {
+    "enableCaching": false,
+    "cacheDirectory": "./cache",
+    "cacheTTL": 3600000,
+    "enableProxyRotation": false,
+    "proxyList": [],
+    "userAgentRotation": true,
+    "respectRobotsTxt": true
+  }
+}
