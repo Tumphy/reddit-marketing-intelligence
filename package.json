@@ -1,0 +1,29 @@
+{
+  "name": "greendoorai-reddit-scraper",
+  "version": "2.0.0",
+  "description": "Production-ready Reddit scraper for GreendoorAI marketing intelligence with enterprise-grade features",
+  "main": "run-production.js",
+  "scripts": {
+    "production": "node run-production.js",
+    "prod": "node run-production.js",
+    "test-production": "node test-production.js",
+    "test-prod": "node test-production.js",
+    "enhanced": "node run-enhanced.js",
+    "start": "node run-enhanced.js",
+    "scrape": "node run-scraper.js",
+    "test": "node test-enhanced.js",
+    "test-basic": "node test-scraper.js",
+    "analyze": "node analyze-current.js",
+    "setup": "mkdir -p data logs archive && echo 'Production directories created'",
+    "clean": "rm -rf data/* logs/* archive/* && echo 'Cleaned all data directories'",
+    "monitor": "tail -f logs/scraper-*.log",
+    "config": "cat production-config.json",
+    "help": "echo 'Production: npm run production | Enhanced: npm run enhanced | Test: npm run test-production'"
+  },
+  "keywords": ["reddit", "scraper", "marketing", "sales", "greendoorai", "enhanced", "full-content"],
+  "author": "GreendoorAI Team",
+  "license": "MIT",
+  "dependencies": {
+    "https": "^1.0.0"
+  }
+}
