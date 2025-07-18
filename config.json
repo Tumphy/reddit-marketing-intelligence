@@ -1,0 +1,67 @@
+{
+  "subreddits": [
+    "sales",
+    "techsales", 
+    "startups",
+    "entrepreneur",
+    "EntrepreneurRideAlong",
+    "smallbusiness",
+    "marketing",
+    "SaaS",
+    "B2B",
+    "salesforce",
+    "hubspot",
+    "digitalnomad",
+    "remotework",
+    "productivity"
+  ],
+  "keywords": {
+    "sales_processes": [
+      "cold calling", "cold email", "prospecting", "lead generation", "sales process",
+      "outreach", "follow up", "pipeline", "quota", "sales target",
+      "discovery call", "demo", "proposal", "closing deals", "objection handling"
+    ],
+    "tools_and_systems": [
+      "crm", "salesforce", "hubspot", "sales automation", "sales tools",
+      "sales enablement", "sales training", "sales coaching", "sales performance"
+    ],
+    "ai_and_automation": [
+      "ai", "artificial intelligence", "automation", "chatgpt", "machine learning",
+      "automate", "efficiency", "productivity", "time saving", "scale"
+    ],
+    "pain_points": [
+      "admin", "data entry", "manual", "repetitive", "time consuming",
+      "research", "meeting prep", "note taking", "contact management"
+    ],
+    "emotions": [
+      "frustrated", "overwhelmed", "burnout", "stress", "difficult", "challenging",
+      "struggle", "wish", "need", "want", "looking for", "solution", "help",
+      "problem", "issue", "pain", "headache", "nightmare"
+    ]
+  },
+  "scoring": {
+    "keyword_weight": 2,
+    "high_upvotes_threshold": 50,
+    "high_upvotes_bonus": 5,
+    "very_high_upvotes_threshold": 100,
+    "very_high_upvotes_bonus": 10,
+    "high_comments_threshold": 20,
+    "high_comments_bonus": 5,
+    "very_high_comments_threshold": 50,
+    "very_high_comments_bonus": 10,
+    "question_bonus": 5,
+    "self_post_bonus": 3,
+    "minimum_relevance_score": 3
+  },
+  "output": {
+    "csv_filename": "reddit-sales-insights.csv",
+    "json_filename": "reddit-sales-insights.json",
+    "max_content_preview": 200
+  },
+  "scraping": {
+    "posts_per_subreddit_hot": 50,
+    "posts_per_subreddit_top": 25,
+    "rate_limit_delay": 1000,
+    "max_retries": 3
+  }
+}

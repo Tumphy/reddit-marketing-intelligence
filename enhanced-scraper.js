@@ -205,7 +205,7 @@ class EnhancedRedditScraper {
         // Extract pain points
         const painPatterns = [
             /(?:frustrated|annoyed|hate|difficult|struggle|problem|issue) (?:with|about|when) ([^.!?]+)/gi,
-            /(?:spend|waste|takes?) (\\d+) (?:hours?|minutes?) (?:on|doing|per) ([^.!?]+)/gi,
+            /(?:spend|waste|takes?) (\d+) (?:hours?|minutes?) (?:on|doing|per) ([^.!?]+)/gi,
             /(?:wish|need|want) (?:to|a|an) ([^.!?]+)/gi
         ];
         
@@ -218,8 +218,8 @@ class EnhancedRedditScraper {
 
         // Extract success metrics
         const successPatterns = [
-            /(?:increased|improved|reduced|saved|gained) (\\d+(?:%|\\s*percent|x|times|hours?|minutes?))/gi,
-            /(?:from \\d+ to \\d+|by \\d+%|in \\d+ (?:days?|weeks?|months?))/gi
+            /(?:increased|improved|reduced|saved|gained) (\d+(?:%|\s*percent|x|times|hours?|minutes?))/gi,
+            /(?:from \d+ to \d+|by \d+%|in \d+ (?:days?|weeks?|months?))/gi
         ];
         
         successPatterns.forEach(pattern => {
@@ -300,53 +300,6 @@ class EnhancedRedditScraper {
         return this.posts;
     }
 
-    generateSpecificMarketingApplications(post) {
-        const category = post.marketing_category;
-        const title = post.title;
-        const content = post.selftext.substring(0, 500);
-        
-        let applications = [];
-
-        // Generate specific use cases based on content
-        if (content.includes('hours') || content.includes('time')) {
-            applications.push('Email subject: Stop wasting hours on [specific task]');
-        }
-        
-        if (content.includes('automated') || content.includes('automation')) {
-            applications.push('Case study: How automation saved [time/effort]');
-        }
-        
-        if (content.includes('frustrated') || content.includes('difficult')) {
-            applications.push('Problem statement: Address frustration with [specific pain]');
-        }
-        
-        if (post.score > 100) {
-            applications.push('Social proof: High engagement validates this pain point');
-        }
-        
-        if (category === 'Success Stories') {
-            applications.push('Customer testimonial angle, before/after story');
-        }
-        
-        // Add category-specific applications
-        switch (category) {
-            case 'Outreach & Prospecting':
-                applications.push('Cold email templates, prospecting guides');
-                break;
-            case 'CRM & Automation':
-                applications.push('Feature comparison, integration benefits');
-                break;
-            case 'Meeting & Demo Management':
-                applications.push('Demo preparation content, meeting efficiency');
-                break;
-            case 'Admin & Efficiency':
-                applications.push('Time-saving ROI calculator, efficiency metrics');
-                break;
-        }
-
-        return applications.join(' | ');
-    }
-
     async saveDetailedCSV(filename = 'reddit-detailed-insights.csv') {
         const csvRows = [];
         
@@ -386,7 +339,7 @@ class EnhancedRedditScraper {
             
             // Clean and format content
             const cleanContent = post.selftext
-                .replace(/\\n+/g, ' ')
+                .replace(/\n+/g, ' ')
                 .replace(/"/g, '""')
                 .substring(0, 2000); // Limit to 2000 chars for CSV
 
@@ -413,7 +366,7 @@ class EnhancedRedditScraper {
             ]);
         }
         
-        const csvContent = csvRows.map(row => row.join(',')).join('\\n');
+        const csvContent = csvRows.map(row => row.join(',')).join('\n');
         
         const filePath = path.join(__dirname, filename);
         fs.writeFileSync(filePath, csvContent);
@@ -465,12 +418,59 @@ class EnhancedRedditScraper {
             ]);
         }
 
-        const csvContent = csvRows.map(row => row.join(',')).join('\\n');
+        const csvContent = csvRows.map(row => row.join(',')).join('\n');
         const filePath = path.join(__dirname, filename);
         fs.writeFileSync(filePath, csvContent);
         
         console.log(`Saved ${topPosts.length} top posts with full content to ${filename}`);
         return filePath;
+    }
+
+    generateSpecificMarketingApplications(post) {
+        const category = post.marketing_category;
+        const title = post.title;
+        const content = post.selftext.substring(0, 500);
+        
+        let applications = [];
+
+        // Generate specific use cases based on content
+        if (content.includes('hours') || content.includes('time')) {
+            applications.push('Email subject: Stop wasting hours on [specific task]');
+        }
+        
+        if (content.includes('automated') || content.includes('automation')) {
+            applications.push('Case study: How automation saved [time/effort]');
+        }
+        
+        if (content.includes('frustrated') || content.includes('difficult')) {
+            applications.push('Problem statement: Address frustration with [specific pain]');
+        }
+        
+        if (post.score > 100) {
+            applications.push('Social proof: High engagement validates this pain point');
+        }
+        
+        if (category === 'Success Stories') {
+            applications.push('Customer testimonial angle, before/after story');
+        }
+        
+        // Add category-specific applications
+        switch (category) {
+            case 'Outreach & Prospecting':
+                applications.push('Cold email templates, prospecting guides');
+                break;
+            case 'CRM & Automation':
+                applications.push('Feature comparison, integration benefits');
+                break;
+            case 'Meeting & Demo Management':
+                applications.push('Demo preparation content, meeting efficiency');
+                break;
+            case 'Admin & Efficiency':
+                applications.push('Time-saving ROI calculator, efficiency metrics');
+                break;
+        }
+
+        return applications.join(' | ');
     }
 
     suggestMarketingUseCase(post) {
@@ -537,7 +537,7 @@ class EnhancedRedditScraper {
             ]);
         }
         
-        const csvContent = csvRows.map(row => row.join(',')).join('\\n');
+        const csvContent = csvRows.map(row => row.join(',')).join('\n');
         
         const filePath = path.join(__dirname, filename);
         fs.writeFileSync(filePath, csvContent);
@@ -580,19 +580,19 @@ class EnhancedRedditScraper {
             subredditStats[sub].avgLength = Math.round(subredditStats[sub].avgLength / subredditStats[sub].count);
         });
         
-        console.log('\\n=== ENHANCED SUMMARY REPORT ===');
+        console.log('\n=== ENHANCED SUMMARY REPORT ===');
         console.log(`Total posts scraped: ${this.posts.length}`);
         console.log(`High-value posts (score > 15): ${this.posts.filter(p => p.relevance_score > 15).length}`);
         console.log(`Posts with substantial content (>200 chars): ${this.posts.filter(p => p.content_length > 200).length}`);
         
-        console.log('\\nMarketing Priority Breakdown:');
+        console.log('\nMarketing Priority Breakdown:');
         Object.entries(priorityBreakdown)
             .sort(([,a], [,b]) => b - a)
             .forEach(([priority, count]) => {
                 console.log(`  ${priority}: ${count} posts`);
             });
         
-        console.log('\\nTop Content-Rich Subreddits:');
+        console.log('\nTop Content-Rich Subreddits:');
         Object.entries(subredditStats)
             .sort(([,a], [,b]) => b.avgLength - a.avgLength)
             .slice(0, 8)
